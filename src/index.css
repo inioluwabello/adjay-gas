@@ -1,13 +1,239 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.w-100 {
+  width: 100%
+}
+input {
+  padding: 1em;
+  border: 1px solid #CDCDCD;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  margin-bottom: 1em;
+}
+.form-wrapper {
+  padding-top: 5em;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+.form-content {
+  width: 500px;
+  border: 1px solid #cdcdcd;
+  border-radius: 20px;
+  box-shadow: 0 0 12px #cdcdcd;
+  margin: 0px auto;
+  padding: 20px;
+}
+.btn {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 500;
+  padding: 6px 16px;
+  display: block;
+  box-sizing: border-box;
+  outline: 0px;
+  border: 0px;
+  margin: 0px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  line-height: 28px;
+  border-radius: 8px;
+}
+.btn-pry {
+    color: #fff;
+    background-color: #4e36f5;
+}
+.btn-submit {
+  margin: 2em 0 0 0;
+}
+.forgot-password {
+  margin: 0px;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.57;
+  color: #635bff;
+  text-decoration: none;
+}
+.main-pane {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.left-pane {
+  width: 270px;
+  background: #121621;
+  color: #fff;
+}
+.user-box {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #cdcdcd;
+  padding: 10px;
+  border-radius: 10px;
+}
+.user-name {
+  color: #b3b9c6
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 1em;
+}
+.workspace {
+  font-weight: 100;
+  color: #8a94a6;
+  font-size: 12px;
+}
+
+.app{
+  height: 100vh;
+}
+.p2 {
+  padding: 2em;
+}
+
+.main-nav {
+  margin-top: 2em;
+}
+.nav-item {
+  display: flex;
+  cursor: pointer;
+  padding: 0.6em 1em;
+  border-radius: 10px;
+}
+.nav-item-icon {
+  margin-right: .5em;
+}
+.nav-item-description {
+  width: calc(100% - 3em)
+}
+.caret {
+  /* margin-top: 4px; */
+}
+.nav-item-options {
+  border-left: 1px solid #8a94a6;
+  padding: .5em 1em;
+  margin-left: 2em;
+}
+.option-item {
+  cursor: pointer;
+  border-radius: 10px;
+}
+.nav-a {
+  display: block;
+  padding: 0.6em 1em;
+}
+.option-item > a {
+  text-decoration: none;
+  color: #8194a6;
+}
+.nav-item:hover, .option-item:hover {
+  background: rgba(255, 255, 255, 0.04)
+}
+.right-pane {
+  width: calc(100% - 270px);
+  overflow-y: scroll;
+}
+.toppane {
+  border-bottom: 1px solid #cdcdcd;
+  padding: 1em
+}
+.notification-bell {
+  cursor: pointer;
+}
+
+.centered-page {
+  max-width: 800px;
+  font-size: 5em;
+  margin: 0px auto;
+}
+
+.main-wrapper {
+  padding: 2em;
+}
+.form-title{
+  font-weight: 200;
+  margin: 1em 0;
+}
+.form-area {
+  border: 1px solid #dcdfe4;
+  padding: 0 1em;
+  border-radius: 10px;
+}
+.form-avatar-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.form-avatar {
+  margin-right: 1em;
+  border: 1px dashed #dddddd;
+  border-radius: 5em;
+  overflow: hidden;
+  padding: 5px;
+  cursor: pointer;
+}
+.form-avatar-content {
+  background: #f9fafb;
+  border-radius: 5em;
+  padding: 3em;
+}
+.form-avatar-buttons > h5 {
+  font-size: 1em;
+  font-weight: 400;
+  margin: 1em 0;
+}
+.form-avatar-buttons > .directions {
+  font-size: 12px;
+}
+.form-avatar-buttons > .select {
+  background: #ffffff;
+  outline: 0;
+  border: 1px solid #dde7ee;
+  padding: 0.6em 1em;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 1em;
+}
+.form-avatar-buttons > .select:hover {
+  background: rgba(50 56 62 / 0.04);
+}
+
+.relative {
+  position: relative;
+}
+.left-pane-right{
+  position: absolute;
+}
+.left-pane-vb {
+  position: absolute;
+  right: 5px;
+  background: none;
+  color: #fff;
+  border: 0;
+  top: 5px;
+}
+.toppane {
+  display: none;
+}
+@media screen and (max-width: 800px) {
+  .toppane {
+    display: block;
+  }
+  .left-pane-left {
+    display: none;
+  }
+  .right-pane {
+    width: 100%;
+  }
+  .left-pane-content {
+    height: 100vh;
+  }
 }

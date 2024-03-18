@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Layout from "./pages/Layout";
+import Dashboard from "./pages/Dashboard";
+import NoPage from "./pages/NoPage";
+
+import AuthProvider from "./hooks/AuthProvider";
+import PrivateRoute from "./router/route";
+import ForgotPassword from "./pages/ForgotPassword";
+import PasswordReset from "./pages/PasswordReset";
+import CreateUser from "./pages/users/CreateUser";
+import ListUsers from "./pages/users/ListUsers";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<PasswordReset />} />
+
+            <Route element={<Layout />}>
+              <Route element={<PrivateRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
+
+              <Route path="list-users" element={<ListUsers />} />
+              <Route path="create-user" element={<CreateUser />} />
+
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
