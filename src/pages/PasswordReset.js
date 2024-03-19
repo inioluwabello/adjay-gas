@@ -81,7 +81,7 @@ M35.000000,39.000000
         </div>
 
         <form onSubmit={handleSubmitEvent}>
-          <h2>Reset Password</h2>
+          <h2>Update Password</h2>
 
           <div className="form_control">
             <label htmlFor="password">Password:</label>

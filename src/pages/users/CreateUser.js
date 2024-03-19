@@ -1,7 +1,10 @@
 import { useState } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import axios from "axios";
 
+
+const apiBaseURL = `http://localhost:3001/api`;
 const CreateUser = () => {
   const [input, setInput] = useState({
     lastname: "",
@@ -9,7 +12,8 @@ const CreateUser = () => {
     email: "",
     phone: "",
     dob: "",
-    gender: ""
+    gender: "",
+    address: ""
   });
 
   const handleInput = (e) => {
@@ -21,8 +25,25 @@ const CreateUser = () => {
   };
 
   const handleSubmitForm = () => {
-    console.log(input)
-  }
+    console.log(input);
+    const configuration = {
+      method: "post",
+      url: `${apiBaseURL}/users`,
+      data: input,
+    };
+
+    // make the API call
+    axios(configuration)
+      .then((result) => {
+        console.log(result);
+        alert(result.data.message)
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.message === "Request failed with status code 400" ? "This user already exists" : error.message);
+      });
+  };
 
   return (
     <div className="container main-wrapper">
@@ -53,7 +74,6 @@ const CreateUser = () => {
               type="file" 
               name="avatar"
               id="avatar" />
-            
           </div>
         </div>
         <br />

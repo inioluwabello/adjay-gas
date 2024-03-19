@@ -17,6 +17,7 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
+            <Route index element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<PasswordReset />} />
