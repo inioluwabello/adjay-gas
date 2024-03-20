@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const apiBaseURL = `http://localhost:3001/api`;
@@ -8,26 +9,35 @@ const PasswordReset = () => {
     email: "",
   });
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userId = queryParams.get('userId');
+  const passwordResetToken = queryParams.get('t');
+
+  const navigate = useNavigate();
+
   const handleSubmitEvent = (e) => {
     e.preventDefault();
     if (input.password !== "" && input.confirm !== "") {
       if (input.password === input.confirm) {
         const configuration = {
-          method: "post",
-          url: `${apiBaseURL}/users/update-password/:id`,
-          data: input,
+          method: "put",
+          url: `${apiBaseURL}/users/update-password/${userId}`,
+          data: {
+            password: input.password,
+            passwordResetToken
+          }
         };
     
         // make the API call
         axios(configuration)
           .then((result) => {
-            console.log(result);
             alert(result.data.message)
-            window.location.reload();
+            navigate("/login")
           })
           .catch((error) => {
             console.log(error);
-            alert(error.message === "Request failed with status code 400" ? "This user already exists" : error.message);
+            alert(error.message);
           });
       }else {
         alert("Passwords do not match")
@@ -39,7 +49,6 @@ const PasswordReset = () => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     setInput((prev) => ({
       ...prev,
       [name]: value,
