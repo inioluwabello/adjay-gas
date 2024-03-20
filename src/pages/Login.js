@@ -44,9 +44,9 @@ const Login = () => {
               fill="none"
               opacity="1.000000"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3.000000"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3.000000"
               d="
 M35.500000,39.000000 
 	C37.500000,39.166668 39.498325,39.357834 41.500359,39.494770 
@@ -67,9 +67,9 @@ M35.500000,39.000000
               fill="none"
               opacity="1.000000"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3.000000"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3.000000"
               d="
 M35.000000,39.000000 
 	C34.456612,33.375610 32.742359,28.166691 29.511700,22.916565 

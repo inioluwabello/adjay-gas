@@ -1,10 +1,11 @@
 import { useState } from "react";
-import ReactCrop from "react-image-crop";
+// import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
 
 
 const apiBaseURL = `http://localhost:3001/api`;
+
 const CreateUser = () => {
   const [input, setInput] = useState({
     lastname: "",
@@ -25,7 +26,6 @@ const CreateUser = () => {
   };
 
   const handleSubmitForm = () => {
-    console.log(input);
     const configuration = {
       method: "post",
       url: `${apiBaseURL}/users`,
