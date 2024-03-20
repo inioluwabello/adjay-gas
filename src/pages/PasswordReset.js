@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+
+const apiBaseURL = `http://localhost:3001/api`;
 
 const PasswordReset = () => {
   const [input, setInput] = useState({
@@ -9,7 +12,23 @@ const PasswordReset = () => {
     e.preventDefault();
     if (input.password !== "" && input.confirm !== "") {
       if (input.password === input.confirm) {
-        // call API here
+        const configuration = {
+          method: "post",
+          url: `${apiBaseURL}/users/update-password/:id`,
+          data: input,
+        };
+    
+        // make the API call
+        axios(configuration)
+          .then((result) => {
+            console.log(result);
+            alert(result.data.message)
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error);
+            alert(error.message === "Request failed with status code 400" ? "This user already exists" : error.message);
+          });
       }else {
         alert("Passwords do not match")
       }
@@ -45,9 +64,9 @@ const PasswordReset = () => {
               fill="none"
               opacity="1.000000"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3.000000"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3.000000"
               d="
 M35.500000,39.000000 
 	C37.500000,39.166668 39.498325,39.357834 41.500359,39.494770 
@@ -68,9 +87,9 @@ M35.500000,39.000000
               fill="none"
               opacity="1.000000"
               stroke="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3.000000"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3.000000"
               d="
 M35.000000,39.000000 
 	C34.456612,33.375610 32.742359,28.166691 29.511700,22.916565 

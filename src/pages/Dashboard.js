@@ -1,16 +1,14 @@
 import React from 'react';
-import { useAuth } from "../hooks/AuthProvider";
+// import { useAuth } from "../hooks/AuthProvider";
 
 const Dashboard = () => {
-  const auth = useAuth();
+  // const auth = useAuth();
+  const user = JSON.parse(localStorage.getItem('user'))
 
   return (
     <div className="container">
       <div>
-        <h1>Welcome! {auth.user?.username}</h1>
-        <button onClick={() => auth.logOut()} className="btn-submit">
-          Logout
-        </button>
+        <h1>Welcome {user.lastname || ""}!</h1>
       </div>
     </div>
   );
