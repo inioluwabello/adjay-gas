@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const apiBaseURL = `http://localhost:3001/api`;
@@ -18,16 +19,6 @@ const ListUsers = () => {
       });
   }, []);
 
-  // const data = [
-  //   {
-  //     id: 1,
-  //     lastname: "Bello",
-  //     othername: "Olakunle David",
-  //     phone: "07047596287",
-  //     email: "belloolakunledavid@gmail.com",
-  //   },
-  // ];
-
   const [filter, setFilter] = useState("");
 
   // Handler for input change
@@ -43,6 +34,12 @@ const ListUsers = () => {
       item.phone.toLowerCase().includes(filter.toLowerCase())
     );
   });
+
+  const navigate = useNavigate();
+  const fetchUseerDetails = (user) => {
+    localStorage.setItem('userDetails', JSON.stringify(user));
+    navigate('/user-details');
+  }
 
   return (
     <div className="container main-wrapper">
@@ -79,7 +76,7 @@ const ListUsers = () => {
           </thead>
           <tbody>
             {filteredData.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} style={{cursor: "pointer"}} onClick={() => fetchUseerDetails(item)}>
                 <td>{item._id}</td>
                 <td>
                   {item.lastname}&nbsp;{item.othername}

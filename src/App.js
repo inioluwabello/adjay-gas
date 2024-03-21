@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
 import CreateUser from "./pages/users/CreateUser";
 import ListUsers from "./pages/users/ListUsers";
+import UserDetails from "./pages/users/UserDetails";
 
 function App() {
   return (
@@ -25,10 +26,11 @@ function App() {
             <Route element={<Layout />}>
               <Route element={<PrivateRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="list-users" element={<ListUsers />} />
+                <Route path="create-user" element={<CreateUser />} />
+                <Route path="user-details" element={<UserDetails />} />
               </Route>
 
-              <Route path="list-users" element={<ListUsers />} />
-              <Route path="create-user" element={<CreateUser />} />
 
               <Route path="*" element={<NoPage />} />
             </Route>
