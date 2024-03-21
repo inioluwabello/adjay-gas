@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
+const apiBaseURL = `http://localhost:3001/api`;
 
 const ListUsers = () => {
-  const data = [
-    {
-      id: 1,
-      lastname: "Bello",
-      othername: "Olakunle David",
-      phone: "07047596287",
-      email: "belloolakunledavid@gmail.com",
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    // Call the API endpoint using Axios
+    axios.get(`${apiBaseURL}/users`)
+      .then(response => {
+        // Update the state with the retrieved users
+        setUsers(response.data);
+      })
+      .catch(error => {
+        // Handle error if any
+        console.error('Error fetching users:', error);
+      });
+  }, []);
 
   const [filter, setFilter] = useState("");
 
@@ -18,7 +26,7 @@ const ListUsers = () => {
     setFilter(e.target.value);
   };
 
-  const filteredData = data.filter((item) => {
+  const filteredData = users.filter((item) => {
     return (
       item.lastname.toLowerCase().includes(filter.toLowerCase()) ||
       item.othername.toLowerCase().includes(filter.toLowerCase()) ||
@@ -26,6 +34,12 @@ const ListUsers = () => {
       item.phone.toLowerCase().includes(filter.toLowerCase())
     );
   });
+
+  const navigate = useNavigate();
+  const fetchUseerDetails = (user) => {
+    localStorage.setItem('userDetails', JSON.stringify(user));
+    navigate('/user-details');
+  }
 
   return (
     <div className="container main-wrapper">
@@ -62,8 +76,8 @@ const ListUsers = () => {
           </thead>
           <tbody>
             {filteredData.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
+              <tr key={item._id} style={{cursor: "pointer"}} onClick={() => fetchUseerDetails(item)}>
+                <td>{item._id}</td>
                 <td>
                   {item.lastname}&nbsp;{item.othername}
                 </td>

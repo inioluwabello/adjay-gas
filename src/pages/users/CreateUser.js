@@ -1,7 +1,9 @@
 import { useState } from "react";
 // import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+// import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
+
+// import UploadPicture from './UploadPicture'
 
 
 const apiBaseURL = `http://localhost:3001/api`;
@@ -29,20 +31,50 @@ const CreateUser = () => {
     const configuration = {
       method: "post",
       url: `${apiBaseURL}/users`,
-      data: input,
+      data: {...input, img: uploadedFileName }
     };
 
     // make the API call
     axios(configuration)
       .then((result) => {
         console.log(result);
-        alert(result.data.message)
+        alert(result.data.message);
         window.location.reload();
       })
       .catch((error) => {
         console.log(error);
-        alert(error.message === "Request failed with status code 400" ? "This user already exists" : error.message);
+        alert(
+          error.message === "Request failed with status code 400"
+            ? "This user already exists"
+            : error.message
+        );
       });
+  };
+
+  const [file, setFile] = useState();
+  const [selectedFile, setSelectedFile] = useState();
+  const [uploadedFileName, setUploadedFileName] = useState();
+  const handleChange = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+    setSelectedFile(e.target.files[0]);
+  }
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      console.log(selectedFile);
+
+      const response = await axios.post(`${apiBaseURL}/image/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      alert(`File uploaded successfully. Filename: ${response.data.filename}`);
+      setUploadedFileName(response.data.filename)
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
   };
 
   return (
@@ -54,7 +86,7 @@ const CreateUser = () => {
 
         <div className="form-avatar-wrapper">
           <div className="form-avatar">
-            <div className="form-avatar-content">
+            {!file && <div className="form-avatar-content">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -65,16 +97,21 @@ const CreateUser = () => {
               >
                 <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
               </svg>
-            </div>
+            </div>}
+
+            {file && <img style={{width: "100px", height: "100px",borderRadius: "50px"}} src={file} alt="User" />}
           </div>
 
           <div className="form-avatar-buttons">
-            <h5>Avatar</h5>
+            <h5 style={{marginTop: "0"}}>Avatar</h5>
             <input 
               type="file" 
               name="avatar"
-              id="avatar" />
+              id="avatar" onChange={handleChange} />
+            
+            {selectedFile && <button disabled={uploadedFileName !== undefined} className="btn btn-primary" onClick={handleUpload}>Upload Image</button>}
           </div>
+
         </div>
         <br />
 
