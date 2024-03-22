@@ -1,10 +1,5 @@
 import { useState } from "react";
-// import ReactCrop from "react-image-crop";
-// import "react-image-crop/dist/ReactCrop.css";
 import axios from "axios";
-
-// import UploadPicture from './UploadPicture'
-
 
 const apiBaseURL = `http://localhost:3001/api`;
 
@@ -28,10 +23,14 @@ const CreateUser = () => {
   };
 
   const handleSubmitForm = () => {
+    const token = localStorage.getItem("site");
     const configuration = {
       method: "post",
       url: `${apiBaseURL}/users`,
-      data: {...input, img: uploadedFileName }
+      data: {...input, img: uploadedFileName },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     };
 
     // make the API call

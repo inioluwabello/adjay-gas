@@ -2,13 +2,24 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
+// const apiBaseURL = `https://gn24cxww-3001.uks1.devtunnels.ms/api`;
 const apiBaseURL = `http://localhost:3001/api`;
+// const apiBaseURL = process.env.API_BASE_URL;
 
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
+    const token = localStorage.getItem("site");
+    const configuration = {
+      method: "get",
+      url: `${apiBaseURL}/users`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     // Call the API endpoint using Axios
-    axios.get(`${apiBaseURL}/users`)
+    axios(configuration)
       .then(response => {
         // Update the state with the retrieved users
         setUsers(response.data);

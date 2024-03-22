@@ -87,37 +87,41 @@ const UserDetails = () => {
             )}
           </div>
 
-          <div className="user-details" style={{ width: "400px" }}>
+          <div className="user-details" style={{ width: "calc(100% - 126px)" }}>
             {user && (
               <table class="table table-success table-striped">
                 <tbody>
                   <tr>
-                    <th scope="row">User Id</th>
+                    <th scope="row" className='text-right'>User Id</th>
                     <td>{user._id}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Email</th>
-                    <td>{user.email}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Last Name</th>
+                    <th scope="row" className='text-right'>Last Name</th>
                     <td>{user.lastname}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Other Name</th>
+                    <th scope="row" className='text-right'>Other Name</th>
                     <td>{user.othername}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Gender</th>
+                    <th scope="row" className='text-right'>Email</th>
+                    <td>{user.email}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className='text-right'>Phone Number</th>
+                    <td>{user.phone}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" className='text-right'>Gender</th>
                     <td>{user.gender}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Date of Birth</th>
+                    <th scope="row" className='text-right'>Date of Birth</th>
                     <td>{user.dob}</td>
                   </tr>
                   <tr>
-                    <th scope="row">Phone Number</th>
-                    <td>{user.phone}</td>
+                    <th scope="row" className='text-right'>Address</th>
+                    <td>{user.address}</td>
                   </tr>
                 </tbody>
               </table>
