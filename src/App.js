@@ -30,8 +30,7 @@ function App() {
                 <Route path="create-user" element={<CreateUser />} />
                 <Route path="user-details" element={<UserDetails />} />
               </Route>
-
-
+              
               <Route path="*" element={<NoPage />} />
             </Route>
           </Routes>

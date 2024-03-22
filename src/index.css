@@ -242,3 +242,6 @@ input {
 .return-link {
   margin-top: 2em;
 }
+.text-right {
+  text-align: right;
+}

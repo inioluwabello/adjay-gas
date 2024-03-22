@@ -1,6 +1,8 @@
 import { useState } from "react";
-// import { useAuth } from "../hooks/AuthProvider";
 import { Link } from 'react-router-dom'
+import axios from "axios";
+
+const apiBaseURL = `http://localhost:3001/api`;
 
 const ForgotPassword = () => {
   const [input, setInput] = useState({
@@ -14,6 +16,23 @@ const ForgotPassword = () => {
     e.preventDefault();
     if (input.email !== "") {
       // Call api here
+      const configuration = {
+        method: "post",
+        url: `${apiBaseURL}/forgot-password`,
+        data: {...input }
+      };
+  
+      // make the API call
+      axios(configuration)
+        .then((result) => {
+          console.log(result);
+          alert(result.data.message);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+          alert(error.message);
+        });
       return;
     }
     alert("Please provide a valid email");
@@ -88,13 +107,13 @@ M35.000000,39.000000
           <h2>Forgot Password</h2>
 
           <div className="form_control">
-            <label htmlFor="user-email">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="email"
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               placeholder="example@yahoo.com"
-              aria-describedby="username"
+              aria-describedby="email"
               aria-invalid="false"
               onChange={handleInput}
             />
