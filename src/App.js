@@ -11,6 +11,8 @@ import PasswordReset from "./pages/PasswordReset";
 import CreateUser from "./pages/users/CreateUser";
 import ListUsers from "./pages/users/ListUsers";
 import UserDetails from "./pages/users/UserDetails";
+import CreateNotification from "./pages/notifications/create-notification";
+import ReceivedNotifications from "./pages/notifications/received-notifications";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
                 <Route path="list-users" element={<ListUsers />} />
                 <Route path="create-user" element={<CreateUser />} />
                 <Route path="user-details" element={<UserDetails />} />
+                <Route path="send-notifications" element={<CreateNotification />} />
+                <Route path="received-notifications" element={<ReceivedNotifications />} />
               </Route>
               
               <Route path="*" element={<NoPage />} />

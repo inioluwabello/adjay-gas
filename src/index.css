@@ -209,6 +209,9 @@ input {
 .relative {
   position: relative;
 }
+.absolute {
+  position: absolute;
+}
 .left-pane-right{
   position: absolute;
 }
@@ -244,4 +247,49 @@ input {
 }
 .text-right {
   text-align: right;
+}
+.abs-user-list {
+  background: #fff;
+    border: 1px solid #CDCDCD;
+    margin-top: -16px;
+    width: 100%;
+}
+.abs-user-list > ul {
+  list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.abs-user-list > ul > li {
+  padding: 10px;
+}
+.abs-user-list>ul>li:hover {
+  background: #eeeeee;
+}
+
+
+.notifications-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 10em);
+}
+
+.notification-pane {
+  width: 250px;
+  border-right: 1px solid #CCC;
+  height: 100%
+}
+
+.notification-title,.notification-message {
+  padding: 0 1em;
+}
+.notification-item {
+  padding: 10px 0;
+  cursor:pointer;
+  border-bottom: 1px solid #CCC;
+}
+.notification-item:hover {
+  background: #eeeeee;
+}
+.message-area {
+  padding: 1em;
 }
