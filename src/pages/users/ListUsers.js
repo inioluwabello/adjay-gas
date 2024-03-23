@@ -47,7 +47,7 @@ const ListUsers = () => {
   });
 
   const navigate = useNavigate();
-  const fetchUseerDetails = (user) => {
+  const fetchUserDetails = (user) => {
     localStorage.setItem('userDetails', JSON.stringify(user));
     navigate('/user-details');
   }
@@ -87,7 +87,7 @@ const ListUsers = () => {
           </thead>
           <tbody>
             {filteredData.map((item) => (
-              <tr key={item._id} style={{cursor: "pointer"}} onClick={() => fetchUseerDetails(item)}>
+              <tr key={item._id} style={{cursor: "pointer"}} onClick={() => fetchUserDetails(item)}>
                 <td>{item._id}</td>
                 <td>
                   {item.lastname}&nbsp;{item.othername}
