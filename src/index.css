@@ -18,15 +18,16 @@ input {
   margin-bottom: 1em;
 }
 .form-wrapper {
-  padding-top: 5em;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  padding: 1em;
+  padding-top: 5em;
 }
 .form-content {
-  width: 500px;
+  max-width: 500px;
   border: 1px solid #cdcdcd;
   border-radius: 20px;
   box-shadow: 0 0 12px #cdcdcd;
-  margin: 1em auto;
+  margin: 0px auto;
   padding: 20px;
 }
 .btn {
