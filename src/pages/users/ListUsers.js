@@ -7,6 +7,16 @@ const apiBaseURL = `http://localhost:3001/api`;
 // const apiBaseURL = process.env.API_BASE_URL;
 
 const ListUsers = () => {
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const  user = JSON.parse(localStorage.getItem('user'));
+    if (user.role !== "admin"){
+      window.alert('You do not have access to this page');
+      navigate("/dashboard")
+    }
+  }, [navigate])
+
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("site");
@@ -46,7 +56,6 @@ const ListUsers = () => {
     );
   });
 
-  const navigate = useNavigate();
   const fetchUserDetails = (user) => {
     localStorage.setItem('userDetails', JSON.stringify(user));
     navigate('/user-details');
@@ -76,7 +85,8 @@ const ListUsers = () => {
       </div>
 
       <div className="form-area">
-        <table className="table table-striped">
+        {users.length === 0 && <h3 className="text-center" style={{padding: "5em"}}>Loading Users<br />Please wait...</h3>}
+        {users.length > 0 && <table className="table table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -97,7 +107,7 @@ const ListUsers = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     </div>
   );

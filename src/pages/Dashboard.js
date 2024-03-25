@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <div>
+      <div className='main' style={{padding: "2em"}}>
         <h1>Welcome {user.lastname || ""}!</h1>
       </div>
     </div>

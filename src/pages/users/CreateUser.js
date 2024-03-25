@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 
 const apiBaseURL = `http://localhost:3001/api`;
 
+
 const CreateUser = () => {
+  
+  const navigate = useNavigate();
+  useEffect(() => {
+    const  user = JSON.parse(localStorage.getItem('user'));
+    if (user.role !== "admin"){
+      window.alert('You do not have access to this page');
+      navigate("/dashboard")
+    }
+  }, [navigate])
+
   const [input, setInput] = useState({
     lastname: "",
     othername: "",
@@ -11,7 +23,7 @@ const CreateUser = () => {
     phone: "",
     dob: "",
     gender: "",
-    address: ""
+    address: "",
   });
 
   const handleInput = (e) => {
@@ -22,12 +34,13 @@ const CreateUser = () => {
     }));
   };
 
+  const [role, setRole] = useState(false)
   const handleSubmitForm = () => {
     const token = localStorage.getItem("site");
     const configuration = {
       method: "post",
       url: `${apiBaseURL}/users`,
-      data: {...input, img: uploadedFileName },
+      data: {...input, img: uploadedFileName, role: (role ? "admin" : "user") },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -76,6 +89,10 @@ const CreateUser = () => {
     }
   };
 
+  const handleRoleChange = (e) => {
+    setRole(e.target.checked)
+  }
+
   return (
     <div className="container main-wrapper">
       <h2 style={{ marginBottom: "1em" }}>Create User</h2>
@@ -85,32 +102,53 @@ const CreateUser = () => {
 
         <div className="form-avatar-wrapper">
           <div className="form-avatar">
-            {!file && <div className="form-avatar-content">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-                fontSize="22px"
-              >
-                <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
-              </svg>
-            </div>}
+            {!file && (
+              <div className="form-avatar-content">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                  fontSize="22px"
+                >
+                  <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
+                </svg>
+              </div>
+            )}
 
-            {file && <img style={{width: "100px", height: "100px",borderRadius: "50px"}} src={file} alt="User" />}
+            {file && (
+              <img
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50px",
+                }}
+                src={file}
+                alt="User"
+              />
+            )}
           </div>
 
           <div className="form-avatar-buttons">
-            <h5 style={{marginTop: "0"}}>Avatar</h5>
-            <input 
-              type="file" 
+            <h5 style={{ marginTop: "0" }}>Avatar</h5>
+            <input
+              type="file"
               name="avatar"
-              id="avatar" onChange={handleChange} />
-            
-            {selectedFile && <button disabled={uploadedFileName !== undefined} className="btn btn-primary" onClick={handleUpload}>Upload Image</button>}
-          </div>
+              id="avatar"
+              onChange={handleChange}
+            />
 
+            {selectedFile && (
+              <button
+                disabled={uploadedFileName !== undefined}
+                className="btn btn-primary"
+                onClick={handleUpload}
+              >
+                Upload Image
+              </button>
+            )}
+          </div>
         </div>
         <br />
 
@@ -236,8 +274,37 @@ const CreateUser = () => {
         </div>
 
         <div className="row">
-          <div className="mb-3">
-            <button style={{float: "right"}} type="button" className="btn btn-primary" onClick={handleSubmitForm}>Create User</button>
+          <div className="col-md-6 col-sm-12">
+            <div className="mb-3">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="role"
+                  name="role"
+                  onChange={handleRoleChange}
+                />
+                <label
+                  className="form-check-label"
+                  for="flexCheckDefault"
+                  style={{ marginTop: "6px" }}
+                >
+                  &nbsp;Set User as Admin?
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 col-sm-12">
+            <div className="mb-3">
+              <button
+                style={{ float: "right" }}
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSubmitForm}
+              >
+                Create User
+              </button>
+            </div>
           </div>
         </div>
       </div>

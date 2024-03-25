@@ -26,7 +26,7 @@ input {
   border: 1px solid #cdcdcd;
   border-radius: 20px;
   box-shadow: 0 0 12px #cdcdcd;
-  margin: 0px auto;
+  margin: 1em auto;
   padding: 20px;
 }
 .btn {
