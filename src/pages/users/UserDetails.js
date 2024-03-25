@@ -8,27 +8,25 @@ const UserDetails = () => {
   const [user, setUser] = useState(null); // State to store the image name
 
   useEffect(() => {
+    const fetchImage = async (name) => {
+      try {
+        const response = await fetch(`${apiBaseURL}/image/${name}`);
+        if (!response.ok) {
+          throw new Error("Image not found");
+        }
+        const data = await response.blob();
+        setImageData(URL.createObjectURL(data));
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    };
+
     const user = JSON.parse(localStorage.getItem("userDetails"));
-    console.log(user)
     setUser(user);
 
     // Fetch the image data when the component mounts
     fetchImage(user.img); // Set the initial image name here
-  }, []);
-
-  const fetchImage = async (name) => {
-    try {
-      const response = await fetch(`${apiBaseURL}/image/${name}`);
-      if (!response.ok) {
-        throw new Error("Image not found");
-      }
-      const data = await response.blob();
-      setImageData(URL.createObjectURL(data));
-      //   setImageName(name);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  };
+  }, [apiBaseURL]);
 
   return (
     <div className="container">

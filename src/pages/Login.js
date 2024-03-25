@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div className="form-wrapper">
       <div className="form-content">
-        <div style={{ textAlign: "center" }}>
+        <h4 style={{ textAlign: "center" }}>
           <svg
             version="1.1"
             x="0px"
@@ -77,10 +77,12 @@ M35.000000,39.000000
 "
             />
           </svg>
-        </div>
+
+        </h4>
 
         <form onSubmit={handleSubmitEvent}>
-          <h2>Sign In</h2>
+          <h3 className="text-center">Adjay Gas CRM | Sign In</h3>
+          <br />
 
           <div className="form_control">
             <label htmlFor="user-email">Email:</label>
