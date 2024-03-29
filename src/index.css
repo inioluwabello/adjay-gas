@@ -167,6 +167,7 @@ input {
   border: 1px solid #dcdfe4;
   padding: 0 1em;
   border-radius: 10px;
+  overflow:auto;
 }
 .form-avatar-wrapper {
   display: flex;
@@ -293,4 +294,7 @@ input {
 }
 .message-area {
   padding: 1em;
+}
+td {
+  white-space: nowrap;
 }
