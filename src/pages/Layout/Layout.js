@@ -42,7 +42,7 @@ const Layout = () => {
                     </button>
                   </div>
 
-                  <LeftPane />
+                  <LeftPane toggleLeftPaneVisibility={toggleLeftPaneVisibility}/>
                 </div>
               </div>
             )}

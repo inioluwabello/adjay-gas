@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/AuthProvider";
 import Logo from "./Logo"
 import DefaultAvatar from "./DefaultAvatar"
 
-const LeftPane = () => {
+const LeftPane = ({ toggleLeftPaneVisibility }) => {
   const auth = useAuth();
   const apiBaseURL = `http://localhost:3001/api`;
 
@@ -56,7 +56,12 @@ const LeftPane = () => {
       <div className="main-nav">
         <div
           className="nav-item"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => { 
+            navigate("/dashboard")
+            if (toggleLeftPaneVisibility) {
+              toggleLeftPaneVisibility();
+            }
+          }}
         >
           <div className="nav-item-icon">
             <svg
@@ -78,7 +83,9 @@ const LeftPane = () => {
         {/* Nav Item Start */}
         <div
           className="nav-item"
-          onClick={() => handleMenuClick(!userDropOpened, setUserDropOpened)}
+          onClick={() => 
+            handleMenuClick(!userDropOpened, setUserDropOpened)
+            }
         >
           <div className="nav-item-icon">
             <svg
@@ -127,12 +134,20 @@ const LeftPane = () => {
         {userDropOpened && (
           <div className="nav-item-options">
             <div className="option-item">
-              <Link className="nav-a" to={"/list-users"}>
+              <Link className="nav-a" onClick={() => {
+                if (toggleLeftPaneVisibility) {
+                  toggleLeftPaneVisibility();
+                }
+              }} to={"/list-users"}>
                 List Users
               </Link>
             </div>
             <div className="option-item">
-              <Link className="nav-a" to={"/create-user"}>
+              <Link className="nav-a" onClick={() => {
+                if (toggleLeftPaneVisibility) {
+                  toggleLeftPaneVisibility();
+                }
+              }} to={"/create-user"}>
                 Create User
               </Link>
             </div>
@@ -197,12 +212,20 @@ const LeftPane = () => {
         {nottificationDropOpened && (
           <div className="nav-item-options">
             <div className="option-item">
-              <Link className="nav-a" to={"/received-notifications"}>
+              <Link className="nav-a" onClick={() => {
+                if (toggleLeftPaneVisibility) {
+                  toggleLeftPaneVisibility();
+                }
+              }} to={"/received-notifications"}>
                 All Items
               </Link>
             </div>
             <div className="option-item">
-              <Link className="nav-a" to={"/send-notifications"}>
+              <Link className="nav-a" onClick={() => {
+                if (toggleLeftPaneVisibility) {
+                  toggleLeftPaneVisibility();
+                }
+              }} to={"/send-notifications"}>
                 Send Item
               </Link>
             </div>

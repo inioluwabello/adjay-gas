@@ -295,9 +295,9 @@ const CreateUser = () => {
             </div>
           </div>
           <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
+            <div className="mb-3 text-right">
               <button
-                style={{ float: "right" }}
+                style={{ display: "inline-block" }}
                 type="button"
                 className="btn btn-primary"
                 onClick={handleSubmitForm}
